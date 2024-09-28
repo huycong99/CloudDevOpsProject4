@@ -8,7 +8,7 @@ on:
       - main
     paths:
       # This will only run on changes to the frontend code
-      - "starter/frontend/**"
+      - "./starter/frontend/**"
 env:
   NODE_VERSION: 18.x
 
