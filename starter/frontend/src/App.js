@@ -12,11 +12,11 @@ export default function App() {
 
   return (
     <div className="container">
-      <h1>Movie List All star</h1>
+      <h1>Movie List</h1>
       <MovieList onMovieClick={handleMovieClick} />
       {selectedMovie && (
         <>
-          <h1>Movie Details </h1>
+          <h1>Movie Details</h1>
           <MovieDetails movie={selectedMovie} />
         </>
       )}
