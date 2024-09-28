@@ -8,7 +8,7 @@ on:
       - main
     paths:
       # This will only run on changes to the backend code
-      - "backend/**"
+      - "starter/backend/**"
 
 env:
   PYTHON_VERSION: 3.11
