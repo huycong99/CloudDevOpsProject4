@@ -4,7 +4,7 @@ on:
   # This allows running on-demand
 
   push:
-    branches: [main]
+    branches: [master]
 
 env:
   NODE_VERSION: 18.x
