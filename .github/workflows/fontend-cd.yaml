@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./frontend
+        working-directory: ./starter/frontend
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./frontend
+        working-directory: ./starter/frontend
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -63,7 +63,7 @@ jobs:
     needs: [lint, test]
     defaults:
       run:
-        working-directory: ./frontend
+        working-directory: ./starter/frontend
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -143,9 +143,9 @@ jobs:
           IMAGE_TAG: latest
         run: |
           kustomize edit set image frontend=$REGISTRY/$REPOSITORY:$IMAGE_TAG
-        working-directory: ./frontend/k8s
+        working-directory: ./starter/frontend/k8s
 
       - name: Apply Kubernetes resources
         run: |
           kustomize build | kubectl apply -f -
-        working-directory: ./frontend/k8s
+        working-directory: ./starter/frontend/k8s
