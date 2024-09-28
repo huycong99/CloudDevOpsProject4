@@ -2,10 +2,9 @@ name: Frontend Continuous Integration
 
 on:
   # This allows running on-demand
-  workflow_dispatch:
+
   push:
-    branches:
-      - main
+    branches: [main]
 
 env:
   NODE_VERSION: 18.x
