@@ -15,6 +15,7 @@ env:
   AWS_REGION: us-east-1
   REPOSITORY: backend
   DOCKER_IMAGE_TAG: ${{ github.sha }}
+  FLAKE8_MAX_LINE_LENGTH: 120
 
 jobs:
   lint_job:
