@@ -33,6 +33,11 @@ jobs:
           pipenv install flake8  
           pipenv install
 
+      - name: Add Lint Script to Pipfile
+        run: |
+          echo -e "\n[scripts]\nlint = \"flake8 .\"" >> Pipfile
+          echo "Added lint script to Pipfile."
+
       - name: Run lint
         run: |
           pipenv run lint
