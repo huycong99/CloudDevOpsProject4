@@ -12,6 +12,7 @@ on:
 
 env:
   PYTHON_VERSION: 3.11
+  FLAKE8_MAX_LINE_LENGTH: 120
 
 jobs:
   lint_job:
@@ -37,6 +38,11 @@ jobs:
         run: |
           echo -e "\n[scripts]\nlint = \"flake8 .\"" >> Pipfile
           echo "Added lint script to Pipfile."
+
+      - name: Create Flake8 Configuration
+        run: |
+          echo "[flake8]" > .flake8
+          echo "max-line-length = ${{env.FLAKE8_MAX_LINE_LENGTH}}" >> .flake8
 
       - name: Run lint
         run: |
