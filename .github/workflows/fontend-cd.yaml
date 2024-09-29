@@ -143,6 +143,6 @@ jobs:
         run: kustomize edit set image frontend=$REGISTRY/${{ env.REPOSITORY}}:${{ env.DOCKER_IMAGE_TAG }}
         working-directory: ./starter/frontend/k8s
 
-      - name: Apply Kubernetes resources
+      - name: Deploy Kubernetes resources
         run: kustomize build | kubectl apply -f -
         working-directory: ./starter/frontend/k8s
