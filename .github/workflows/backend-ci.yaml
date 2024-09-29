@@ -96,5 +96,5 @@ jobs:
       - test_job
     steps:
       - name: Build
-        working-directory: starter/frontend
+        working-directory: starter/backend
         run: docker build -t my-backend-app
