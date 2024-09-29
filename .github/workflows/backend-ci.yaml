@@ -118,4 +118,4 @@ jobs:
 
       - name: Build
         working-directory: starter/backend
-        run: docker build -t backend-app:latest starter/backend
+        run: docker build -t backend-app:latest .
