@@ -109,6 +109,14 @@ jobs:
         with:
           python-version: ${{env.PYTHON_VERSION}}
 
+      - name: Cache pipenv dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pipenv
+          key: pipenv-${{ runner.os }}-${{ hashFiles('**/Pipfile.lock') }}
+          restore-keys: |
+            pipenv-${{ runner.os }}-
+
       - name: Install dependencies
         run: |
           pip install pipenv
