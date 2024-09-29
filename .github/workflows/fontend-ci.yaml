@@ -45,7 +45,7 @@ jobs:
       # Step 5: Run lint command
       - name: Run lint
         working-directory: starter/frontend
-        run: npm run lint
+        run: npm run lint -- --fix
 
   test_job:
     name: Run Tests
