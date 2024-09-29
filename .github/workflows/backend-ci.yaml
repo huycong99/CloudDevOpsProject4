@@ -97,4 +97,4 @@ jobs:
     steps:
       - name: Build
         working-directory: starter/backend
-        run: docker build -t my-backend-app
+        run: docker build -t my-backend-app starter/backend
