@@ -11,7 +11,7 @@ on:
       - "starter/frontend/**"
 env:
   NODE_VERSION: 18.x
-  AWS_REGION: us-east-01
+  AWS_REGION: us-east-1
   REPOSITORY: frontend
   DOCKER_IMAGE_TAG: ${{ github.sha }}
 
