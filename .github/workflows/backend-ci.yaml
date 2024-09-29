@@ -30,6 +30,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install pipenv
+          pip install flake8
           pipenv install
 
       - name: Run lint
