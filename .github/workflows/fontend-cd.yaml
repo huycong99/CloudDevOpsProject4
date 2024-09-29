@@ -117,6 +117,13 @@ jobs:
         with:
           mask-password: "true"
 
+      - name: Update kubeconfig
+        run: aws eks update-kubeconfig --name cluster
+
+      - name: Run init.sh
+        run: ./init.sh
+        working-directory: ./setup
+
       - name: Get REACT_APP_MOVIE_API_URL from Kubernetes Service
         id: get-movie-api-url
         run: |
@@ -132,13 +139,6 @@ jobs:
           echo "Image Tag: ${{ env.DOCKER_IMAGE_TAG }}"
           docker build --build-arg REACT_APP_MOVIE_API_URL=${{ env.REACT_APP_MOVIE_API_URL }} -t $REGISTRY/${{ env.REPOSITORY}}:${{ env.DOCKER_IMAGE_TAG }} .
           docker push $REGISTRY/${{ env.REPOSITORY}}:${{ env.DOCKER_IMAGE_TAG }}
-
-      - name: Update kubeconfig
-        run: aws eks update-kubeconfig --name cluster
-
-      - name: Run init.sh
-        run: ./init.sh
-        working-directory: ./setup
 
       - name: Set Docker image in Kustomize
         env:
