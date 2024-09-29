@@ -120,10 +120,6 @@ jobs:
       - name: Update kubeconfig
         run: aws eks update-kubeconfig --name cluster
 
-      - name: Run init.sh
-        run: ./init.sh
-        working-directory: ./setup
-
       - name: Get REACT_APP_MOVIE_API_URL from Kubernetes Service
         id: get-movie-api-url
         run: |
