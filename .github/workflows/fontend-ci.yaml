@@ -121,4 +121,4 @@ jobs:
       # Step 6: Build Docker image
       - name: Build Docker image
         working-directory: starter/frontend
-        run: docker build -t frontend-app:latest
+        run: docker build -t frontend-app:latest starter/frontend
