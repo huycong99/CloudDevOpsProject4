@@ -10,6 +10,7 @@ function MovieList({ onMovieClick }) {
       setMovies(response.data.movies);
     });
   }, []);
+  
 
   return (
     <ul>
