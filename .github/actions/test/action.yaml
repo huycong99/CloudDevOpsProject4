@@ -8,17 +8,13 @@ outputs: {}
 runs:
   using: "composite"
   steps:
-    # Step 1: Checkout the code
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    # Step 2: Setup Node.js with specified version
+    # Step 1: Setup Node.js with specified version
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: ${{ inputs.node_version }}
 
-    # Step 3: Cache Node.js modules
+    # Step 2: Cache Node.js modules
     - name: Cache Node.js modules
       uses: actions/cache@v3
       with:
@@ -27,12 +23,12 @@ runs:
         restore-keys: |
           ${{ runner.os }}-node-modules-
 
-    # Step 4: Install dependencies
+    # Step 3: Install dependencies
     - name: Install dependencies
       working-directory: starter/frontend
       run: npm ci
 
-    # Step 5: Run tests
+    # Step 4: Run tests
     - name: Run tests
       working-directory: starter/frontend
       run: npm run test
