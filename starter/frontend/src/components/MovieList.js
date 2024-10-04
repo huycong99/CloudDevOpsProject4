@@ -10,7 +10,6 @@ function MovieList({ onMovieClick }) {
       setMovies(response.data.movies);
     });
   }, []);
-  
   return (
     <ul>
       {movies.map((movie) => (
