@@ -24,57 +24,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Run lint custom action
+        uses: ./.github/actions/lintFe
         with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Cache Node.js modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('starter/frontend/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
-
-      - name: Install dependencies
-        working-directory: starter/frontend
-        run: npm ci
-
-      # Lint step
-      - name: Run lint
-        working-directory: starter/frontend
-        run: npm run lint -- --fix
+          node_version: ${{ env.NODE_VERSION }}
 
   test_job:
-    name: Run Tests
+    name: Test Code
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Run test custom action
+        uses: ./.github/actions/testFe
         with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Cache Node.js modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('starter/frontend/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
-
-      - name: Install dependencies
-        working-directory: starter/frontend
-        run: npm ci
-
-      # Test step
-      - name: Run tests
-        working-directory: starter/frontend
-        run: npm run test
+          node_version: ${{ env.NODE_VERSION }}
 
   build_job:
     name: Build Docker Image and Deploy
