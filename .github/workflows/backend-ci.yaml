@@ -23,70 +23,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - name: Run backend lint custom action
+        uses: ./.github/actions/lintBe
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
-
-      - name: Cache pipenv dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pipenv
-          key: pipenv-${{ runner.os }}-${{ hashFiles('**/Pipfile.lock') }}
-          restore-keys: |
-            pipenv-${{ runner.os }}-
-
-      - name: Install dependencies
-        run: |
-          pip install pipenv
-          pipenv install flake8  
-          pipenv install
-
-      - name: Add Lint Script to Pipfile
-        run: |
-          echo -e "\n[scripts]\nlint = \"flake8 .\"" >> Pipfile
-          echo "Added lint script to Pipfile."
-
-      - name: Create Flake8 Configuration
-        run: |
-          echo "[flake8]" > .flake8
-          echo "max-line-length = ${{env.FLAKE8_MAX_LINE_LENGTH}}" >> .flake8
-
-      - name: Run lint
-        run: |
-          pipenv run lint
+          python_version: ${{ env.PYTHON_VERSION }}
+          flake8_max_line_length: ${{ env.FLAKE8_MAX_LINE_LENGTH }}
 
   test_job:
-    name: Backend run test
+    name: Backend Test Code
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./starter/backend
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - name: Run backend test custom action
+        uses: ./.github/actions/testBe
         with:
-          python-version: ${{env.PYTHON_VERSION}}
-
-      - name: Cache pipenv dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pipenv
-          key: pipenv-${{ runner.os }}-${{ hashFiles('**/Pipfile.lock') }}
-          restore-keys: |
-            pipenv-${{ runner.os }}-
-
-      - name: Install dependencies
-        run: |
-          pip install pipenv
-          pipenv install
-
-      - name: Run tests
-        run: |
-          pipenv run test
+          python_version: ${{ env.PYTHON_VERSION }}
 
   build:
     name: Build

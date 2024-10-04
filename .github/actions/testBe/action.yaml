@@ -1,0 +1,37 @@
+name: "Backend Test Action"
+description: "A custom action to test the backend code"
+inputs:
+  python_version:
+    description: "Python version to use"
+    required: true
+outputs: {}
+runs:
+  using: "composite"
+  steps:
+    # Step 1: Setup Python with specified version
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python_version }}
+
+    # Step 2: Cache pipenv dependencies
+    - name: Cache pipenv dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pipenv
+        key: pipenv-${{ runner.os }}-${{ hashFiles('**/Pipfile.lock') }}
+        restore-keys: |
+          pipenv-${{ runner.os }}-
+
+    # Step 3: Install dependencies
+    - name: Install dependencies
+      run: |
+        pip install pipenv
+        pipenv install
+      shell: bash
+
+    # Step 4: Run tests
+    - name: Run tests
+      run: |
+        pipenv run test
+      shell: bash

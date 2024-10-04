@@ -1,0 +1,55 @@
+name: "Backend Lint Action"
+description: "A custom action to lint the backend code"
+inputs:
+  python_version:
+    description: "Python version to use"
+    required: true
+  flake8_max_line_length:
+    description: "Maximum line length for Flake8"
+    required: true
+outputs: {}
+runs:
+  using: "composite"
+  steps:
+    # Step 1: Setup Python with specified version
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python_version }}
+
+    # Step 2: Cache pipenv dependencies
+    - name: Cache pipenv dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pipenv
+        key: pipenv-${{ runner.os }}-${{ hashFiles('**/Pipfile.lock') }}
+        restore-keys: |
+          pipenv-${{ runner.os }}-
+
+    # Step 3: Install dependencies
+    - name: Install dependencies
+      run: |
+        pip install pipenv
+        pipenv install flake8  
+        pipenv install
+      shell: bash
+
+    # Step 4: Add Lint Script to Pipfile
+    - name: Add Lint Script to Pipfile
+      run: |
+        echo -e "\n[scripts]\nlint = \"flake8 .\"" >> Pipfile
+        echo "Added lint script to Pipfile."
+      shell: bash
+
+    # Step 5: Create Flake8 Configuration
+    - name: Create Flake8 Configuration
+      run: |
+        echo "[flake8]" > .flake8
+        echo "max-line-length = ${{ inputs.flake8_max_line_length }}" >> .flake8
+      shell: bash
+
+    # Step 6: Run lint
+    - name: Run lint
+      run: |
+        pipenv run lint
+      shell: bash
