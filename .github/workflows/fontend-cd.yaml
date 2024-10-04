@@ -89,7 +89,7 @@ jobs:
       - name: Get REACT_APP_MOVIE_API_URL from Kubernetes Service
         id: get-movie-api-url
         run: |
-          REACT_APP_MOVIE_API_URL=$(kubectl get svc frontend -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+          REACT_APP_MOVIE_API_URL=$(kubectl get svc backend -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
           echo "REACT_APP_MOVIE_API_URL=$REACT_APP_MOVIE_API_URL" >> $GITHUB_ENV
 
       - name: Build and Push to ECR
