@@ -27,8 +27,10 @@ runs:
     - name: Install dependencies
       working-directory: starter/frontend
       run: npm ci
+      shell: bash
 
     # Step 4: Run lint command
     - name: Run lint
       working-directory: starter/frontend
       run: npm run lint -- --fix
+      shell: bash
