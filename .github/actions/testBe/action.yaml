@@ -33,5 +33,5 @@ runs:
     # Step 4: Run tests
     - name: Run tests
       run: |
-        pipenv run test
+        pipenv run pytest
       shell: bash
