@@ -1,0 +1,38 @@
+name: "Frontend Lint Action"
+description: "A custom action to lint the frontend code"
+inputs:
+  node_version:
+    description: "Node.js version to use"
+    required: true
+outputs: {}
+runs:
+  using: "composite"
+  steps:
+    # Step 1: Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Setup Node.js with specified version
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node_version }}
+
+    # Step 3: Cache Node.js modules
+    - name: Cache Node.js modules
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-modules-${{ hashFiles('starter/frontend/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-modules-
+
+    # Step 4: Install dependencies
+    - name: Install dependencies
+      working-directory: starter/frontend
+      run: npm ci
+
+    # Step 5: Run lint command
+    - name: Run lint
+      working-directory: starter/frontend
+      run: npm run lint -- --fix
