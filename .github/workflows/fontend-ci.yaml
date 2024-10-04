@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: Run lint custom action
-        uses: ./github/actions/lint
+        uses: ./.github/actions/lint
         with:
           node_version: ${{ env.NODE_VERSION }}
 
@@ -29,7 +29,7 @@ jobs:
 
     steps:
       - name: Run test custom action
-        uses: ./github/actions/test
+        uses: ./.github/actions/test
         with:
           node_version: ${{ env.NODE_VERSION }}
 
