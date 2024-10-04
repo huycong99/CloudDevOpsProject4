@@ -101,7 +101,7 @@ jobs:
           echo "Repository: ${{ env.REPOSITORY}}"
           echo "Image Tag: ${{ env.DOCKER_IMAGE_TAG }}"
           echo "URL : ${{ env.REACT_APP_MOVIE_API_URL }}"
-          docker build --build-arg REACT_APP_MOVIE_API_URL=${{ env.REACT_APP_MOVIE_API_URL }} -t $REGISTRY/${{ env.REPOSITORY}}:${{ env.DOCKER_IMAGE_TAG }} .
+          docker build --build-arg REACT_APP_MOVIE_API_URL=http://${{ env.REACT_APP_MOVIE_API_URL }} -t $REGISTRY/${{ env.REPOSITORY}}:${{ env.DOCKER_IMAGE_TAG }} .
           docker push $REGISTRY/${{ env.REPOSITORY}}:${{ env.DOCKER_IMAGE_TAG }}
 
       - name: Set Docker image in Kustomize
