@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run lint custom action
-        uses: ./github/actions/lint
+        uses: ./.github/actions/lint
         with:
           node_version: ${{ env.NODE_VERSION }}
 
@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run test custom action
-        uses: ./github/actions/test
+        uses: ./.github/actions/test
         with:
           node_version: ${{ env.NODE_VERSION }}
 
