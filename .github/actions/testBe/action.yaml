@@ -26,12 +26,12 @@ runs:
     # Step 3: Install dependencies
     - name: Install dependencies
       run: |
-        pip install pipenv
+        pip install pipenv==2024.0.3
         pipenv install
       shell: bash
 
     # Step 4: Run tests
     - name: Run tests
       run: |
-        pipenv run pytest
+        pipenv run test
       shell: bash
